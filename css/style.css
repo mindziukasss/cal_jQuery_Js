@@ -1,0 +1,64 @@
+body {
+    background: url(https://images.unsplash.com/photo-1432821579285-1b649e5b1ce3?crop=entropy&fit=crop&fm=jpg&h=650&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1375) no-repeat center center fixed;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    padding-top: 100px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.calculator {
+    width: 250px;
+    height: 350px;
+    background: red;
+    margin: 50px auto 0;
+    padding: 5px 10px;
+    border-radius: 10px;
+    background: #ececec;
+    box-shadow: 4px 7px 10px 3px #000, inset 0 0 2px 0 #000;
+    background-image: -webkit-repeating-linear-gradient(left, hsla(0, 0%, 100%, 0) 0%, hsla(0, 0%, 100%, 0) 6%, hsla(0, 0%, 100%, .1) 7.5%), -webkit-repeating-linear-gradient(left, hsla(0, 0%, 0%, 0) 0%, hsla(0, 0%, 0%, 0) 4%, hsla(0, 0%, 0%, .03) 4.5%), -webkit-repeating-linear-gradient(left, hsla(0, 0%, 100%, 0) 0%, hsla(0, 0%, 100%, 0) 1.2%, hsla(0, 0%, 100%, .15) 2.2%), linear-gradient(180deg, hsl(0, 0%, 78%) 0%, hsl(0, 0%, 85%) 47%, hsl(0, 0%, 78%) 53%, hsl(0, 0%, 70%)100%);
+}
+
+input {
+    width: 200px;
+    height: 50px;
+    background: #d4d4d4;
+    margin: 15px;
+    border-radius: 2px;
+    text-align: right;
+    padding-top: 5px;
+    padding-right: 5px;
+    overflow: hidden;
+    background: -webkit-linear-gradient(top, #bebebe 0%, #d4d4d4 100%);
+    background: -moz-linear-gradient(top, #bebebe 0%, #d4d4d4 100%);
+}
+
+button {
+    cursor: pointer;
+    width: 45px;
+    height: 37px;
+    background: #a5a5a5;
+    margin: 10px 1px 4px 9px;
+    border-radius: 10px;
+    padding-top: 0px;
+    box-shadow: 0 1px 2px #000;
+    border-bottom: 2px solid #555;
+    -moz-transition: 0.1s;
+    -webkit-transition: 0.1s;
+    transition: 0.1s;
+    position: relative;
+    background: -webkit-linear-gradient(top, #c0c0c0 0%, #8f8f8f 100%);
+    background: -moz-linear-gradient(top, #c0c0c0 0%, #8f8f8f 100%);
+}
+
+button:hover {
+    background: -webkit-linear-gradient(top, #c0c0c0 0%, #737373 100%);
+    background: -moz-linear-gradient(top, #c0c0c0 0%, #737373 100%);
+}
+
+button:active {
+    border-bottom-width: 0;
+    top: 1px;
+}
