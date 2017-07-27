@@ -55,6 +55,18 @@ function handleClick(e) {
                 }
                 $('input').val(a);
                 break;
+            case '&#177;':
+
+                if (a[0] === '-') {
+                    a = a.substring(1, a.length);
+                    $('input').val(a);
+                } else {
+                    if (a !== '0') {
+                        a = '-' + a;
+                        $('input').val(a);
+                    }
+                }
+                break;
         }
 
     }
