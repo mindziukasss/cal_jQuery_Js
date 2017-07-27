@@ -13,26 +13,38 @@ var a = '0';
 
 function handleClick(e) {
     var $b = $(e.currentTarget);
+    if ($b.attr('type') === 'number') {
 
-    if ($b.attr('type') == 'number') {
-        if ($b.val() === '.') {
-            if (a.indexOf('.') === -1) {
-                a += $b.val();
-                $('input').val(a);
-            }
-        } else {
-            a += $b.val();
-            $('input').val(a);
+        switch ($b.val()) {
+            case '.':
+                if (a.indexOf('.') === -1) {
+                    a += $b.val();
+                    $('input').val(a);
+                }
+                break;
+
+            case '0':
+                if (a.length === 1 && a === '0') {
+                } else {
+                    a += $b.val();
+                    $('input').val(a);
+                }
+                break;
+
+            default:
+                if (a.length === 1 && a === '0') {
+                    a = $b.val();
+                    $('input').val(a);
+                } else {
+                    a += $b.val();
+                    $('input').val(a);
+                }
         }
-    }
-
-    else if ($b.attr('type') == 'action') {
-
+    } else {
 
     }
-
-
 }
+
 $(document).ready(function () {
     $("button").click(handleClick);
 });
