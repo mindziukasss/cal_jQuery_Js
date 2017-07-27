@@ -67,6 +67,22 @@ function handleClick(e) {
                     }
                 }
                 break;
+            case '+':
+            case '-':
+            case '*':
+            case '/':
+            case '%':
+
+                action = $b.val();
+                $('.disable').attr('disabled', true);
+                a += '' + action + '';
+                $('input').val(a);
+
+                break;
+                // console.log(action);
+
+
+            default:
         }
 
     }
