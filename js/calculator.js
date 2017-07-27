@@ -41,6 +41,21 @@ function handleClick(e) {
                 }
         }
     } else {
+        switch ($b.val()) {
+            case 'C':
+                a = '0';
+                $('input').val(a);
+                $('.disable').attr("disabled", false);
+                break;
+
+            case 'CE':
+                a = a.substring(0, a.length - 1);
+                if (a.length < 1) {
+                    a = '0';
+                }
+                $('input').val(a);
+                break;
+        }
 
     }
 }
