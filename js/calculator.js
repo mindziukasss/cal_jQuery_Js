@@ -184,35 +184,38 @@ function updatNumber(action, value) {
         case ACTION_PROC:
 
             var a;
+            if (numbers[action.length] === '0')
+                numbers = '0';
+            else {
+                for (var i = 0; i < numbers.length - 1; i++) {
+                    if (a) {
+                        var b = parseFloat(numbers[i]);
+                        switch (actions[i - 1]) {
+                            case '+':
+                                a += b;
+                                break;
+                            case '-':
+                                a -= b;
+                                break;
+                            case '*':
+                                a *= b;
+                                break;
+                            case '/':
+                                a /= b;
+                                break;
 
-            for (var i = 0; i < numbers.length-1; i++) {
-                if (a) {
-                    var b = parseFloat(numbers[i]);
-                    switch (actions[i - 1]) {
-                        case '+':
-                            a += b;
-                            break;
-                        case '-':
-                            a -= b;
-                            break;
-                        case '*':
-                            a *= b;
-                            break;
-                        case '/':
-                            a /= b;
-                            break;
-
+                        }
+                    } else {
+                        a = parseFloat(numbers[i]);
                     }
-                } else {
-                    a = parseFloat(numbers[i]);
                 }
+                numbers[actions.length] = ((a / 100) * numbers[actions.length]).toString();
+
+                if (numbers[actions.length] === "NaN") {
+                    numbers[actions.length] = '0';
+                }
+
             }
-            numbers[actions.length] = ((a/100) * numbers[actions.length]).toString();
-
-
-
-
-
             break;
 
     }
