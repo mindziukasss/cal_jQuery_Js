@@ -16,20 +16,14 @@ var ACTION_DEL_LAST = 'last_del';
 var ACTION_CALCUL = 'calcul';
 
 
-// var a = '0';
-
 function handleClick(e) {
     var $b = $(e.currentTarget);
     if ($b.attr('type') === 'number') {
         updatNumber(ACTION_INC, $b.val());
-        updateInput();
 
     } else {
         switch ($b.val()) {
             case 'C':
-                // a = '0';
-                // $('input').val(a);
-                // $('.disable').attr("disabled", false);
                 updatNumber(ACTION_DELETE);
                 break;
 
@@ -61,6 +55,7 @@ function handleClick(e) {
             case '/':
             case '%':
 
+
                 if (numbers[numbers.length - 1] !== '0') {
                     actions.push($b.val());
                     numbers[actions.length] = '0'
@@ -79,44 +74,22 @@ function handleClick(e) {
                 break;
 
             case '=':
+                updatNumber(ACTION_CALCUL);
 
-                for (var i = 0; i < numbers.length; i++) {
-                    if (a) {
-                       var b =parseFloat(numbers[i]);
-                        switch (actions[i - 1]) {
-                            case '+':
-                                a += b;
-                                break;
-                            case '-':
-                                a -= b;
-                                break;
-                            case '*':
-                                a *= b;
-                                break;
-                            case '/':
-                                a /= b;
-                                break;
-                        }
-                    } else {
-                        var a = parseFloat(numbers[i]);
-                    }
-
-
-                }
-                console.log(a);
-                $('input').val(a);
-
+                break;
         }
-
-
     }
+
+    updateInput();
+    console.log(numbers, actions);
+    // console.log(actions);
+
 }
 
 var numbers = ['0'];
 var actions = [];
 
 function updatNumber(action, value) {
-    // console.log(action, value);
     switch (action) {
         case ACTION_INC:
             var n = numbers[actions.length];
@@ -137,14 +110,13 @@ function updatNumber(action, value) {
                     }
                     break;
 
+
+                    break;
                 default:
                     if (n.length === 1 && n === '0') {
                         n = value;
-                        // $('input').val(n);
                     } else {
                         n += value;
-                        // $('input').val(n);
-
                     }
             }
 
@@ -153,9 +125,30 @@ function updatNumber(action, value) {
 
             break;
         case ACTION_DEL_LAST:
+            if (numbers[actions.length] === '0')
+            {
+                if (numbers.length > 1)
+                {
+                    numbers.pop();
+                    actions.pop();
+                }
+            } else
+                {
+                    
+                n = numbers[actions.length];
+                n = n.substring(0, n.length - 1);
+
+                if (n.length === 0)
+                    n = '0';
+
+                numbers[actions.length] = n;
+            }
 
             break;
         case ACTION_DELETE:
+            $('input').val('0');
+            numbers = ['0'];
+            actions = [];
 
             break;
         case ACTION_REPLACE:
@@ -165,30 +158,54 @@ function updatNumber(action, value) {
 
             break;
 
-        default:
-        // alert('You have not action!');
-    }
+        case ACTION_CALCUL:
 
+            var a;
+
+            for (var i = 0; i < numbers.length; i++) {
+                if (a) {
+                    var b = parseFloat(numbers[i]);
+                    switch (actions[i - 1]) {
+                        case '+':
+                            a += b;
+                            break;
+                        case '-':
+                            a -= b;
+                            break;
+                        case '*':
+                            a *= b;
+                            break;
+                        case '/':
+                            a /= b;
+                            break;
+                    }
+                } else {
+                    a = parseFloat(numbers[i]);
+                }
+            }
+
+            numbers = [a];
+            actions = [];
+
+    }
 }
 
 function updateInput() {
 
     var upIntp = '';
-    for (var i = 0; i < numbers.length; i++) {
-        if (numbers[i] !== '0')
-            upIntp += numbers[i];
-
-
-        if (actions[i]) {
-            upIntp += '' + actions[i] + '';
+    if (numbers.length === 1) {
+        upIntp = numbers['0'];
+    } else {
+        for (var i = 0; i < numbers.length; i++) {
+            if (numbers[i] !== '0')
+                upIntp += numbers[i];
+            if (actions[i]) {
+                upIntp += '' + actions[i] + '';
+            }
         }
     }
+
     $('input').val(upIntp);
-
-
-    // console.log(upIntp);
-    // var input =  numbers.concat(actions);
-    // console.log(input);
 }
 
 $(document).ready(function () {
