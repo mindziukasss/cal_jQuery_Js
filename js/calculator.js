@@ -26,28 +26,12 @@ function handleClick(e) {
             case 'C':
                 updatNumber(ACTION_DELETE);
                 break;
-
             case 'CE':
-
                 updatNumber(ACTION_DEL_LAST);
-                // a = a.substring(0, a.length - 1);
-                // if (a.length < 1) {
-                //     a = '0';
-                // }
-                // $('input').val(a);
                 break;
             case '&#177;':
                 updatNumber(ACTION_REVERS);
 
-                // if (a[0] === '-') {
-                //     // a = a.substring(1, a.length);
-                //     // $('input').val(a);
-                // } else {
-                //     if (a !== '0') {
-                //         // a = '-' + a;
-                //         // $('input').val(a);
-                //     }
-                // }
                 break;
             case '+':
             case '-':
@@ -67,10 +51,6 @@ function handleClick(e) {
                 }
 
                 numbers[actions.length] = '0';
-                // $('.disable').attr('disabled', true);
-                // a += '' + action + '';
-                // $('input').val(a);
-
                 break;
 
             case '=':
@@ -106,7 +86,6 @@ function updatNumber(action, value) {
                     if (n.length === 1 && n === '0') {
                     } else {
                         n += value;
-                        // $('input').val(n);
                     }
                     break;
 
@@ -134,7 +113,7 @@ function updatNumber(action, value) {
                 }
             } else
                 {
-                    
+
                 n = numbers[actions.length];
                 n = n.substring(0, n.length - 1);
 
@@ -146,7 +125,6 @@ function updatNumber(action, value) {
 
             break;
         case ACTION_DELETE:
-            $('input').val('0');
             numbers = ['0'];
             actions = [];
 
@@ -155,7 +133,15 @@ function updatNumber(action, value) {
 
             break;
         case ACTION_REVERS:
-
+             n = numbers[actions.length];
+            if (n[0] === '-') {
+                n = n.substring(1, n.length);
+            } else {
+                if (n !== '0') {
+                    n = '-' + n;
+                }
+            }
+            numbers[actions.length] = n;
             break;
 
         case ACTION_CALCUL:
