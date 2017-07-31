@@ -21,3 +21,11 @@ var data = [
     {type:"action", class: "button disable", value: "%"},
     {type:"action", class: "button disable", value: "="}
 ];
+
+
+var ACTION_DELETE = 'clear';
+var ACTION_INC = 'number';
+var ACTION_REVERS = 'revers';
+var ACTION_DEL_LAST = 'last_del';
+var ACTION_CALCUL = 'calcul';
+var ACTION_PROC = 'proc';

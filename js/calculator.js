@@ -6,78 +6,62 @@ $(document).ready(function () {
         );
     });
 });
-
-
-var ACTION_DELETE = 'clear';
-var ACTION_INC = 'number';
-var ACTION_REPLACE = 'replace';
-var ACTION_REVERS = 'revers';
-var ACTION_DEL_LAST = 'last_del';
-var ACTION_CALCUL = 'calcul';
-var ACTION_PROC = 'proc';
-
-
+/*
+ * This function check type and do action by case*/
 function handleClick(e) {
     var $b = $(e.currentTarget);
     if ($b.attr('type') === 'number') {
-        updatNumber(ACTION_INC, $b.val());
-
+        updateNumber(ACTION_INC, $b.val());
     } else {
         switch ($b.val()) {
             case 'C':
-                updatNumber(ACTION_DELETE);
+                updateNumber(ACTION_DELETE);
                 break;
             case 'CE':
-                updatNumber(ACTION_DEL_LAST);
+                updateNumber(ACTION_DEL_LAST);
                 break;
             case '&#177;':
-                updatNumber(ACTION_REVERS);
+                updateNumber(ACTION_REVERS);
                 break;
             case '%':
-                updatNumber(ACTION_PROC);
-
+                updateNumber(ACTION_PROC);
                 break;
+
+                //update action array and creating new number
             case '+':
             case '-':
             case '*':
             case '/':
-
                 var n = numbers[actions.length];
                 if (n[n.length - 1] === '.') {
                     n = n.substring(0, n.length - 1);
                 }
                 numbers[actions.length] = n;
-
-
                 if (numbers[numbers.length - 1] !== '0') {
                     actions.push($b.val());
                     numbers[actions.length] = '0'
-
                 } else {
                     actions.pop();
                     actions.push($b.val());
-
                 }
-
                 numbers[actions.length] = '0';
                 break;
-
             case '=':
-                updatNumber(ACTION_CALCUL);
-
+                updateNumber(ACTION_CALCUL);
                 break;
         }
     }
-
     updateInput();
-    console.log(numbers, actions);
-
 }
 
 var numbers = ['0'];
 var actions = [];
 
-function updatNumber(action, value) {
+/*
+ * That's all logic
+ * */
+
+function updateNumber(action, value) {
     switch (action) {
         case ACTION_INC:
             var n = numbers[actions.length];
@@ -104,11 +88,9 @@ function updatNumber(action, value) {
                         n += value;
                     }
             }
-
             numbers[actions.length] = n;
-
-
             break;
+
         case ACTION_DEL_LAST:
             if (numbers[actions.length] === '0') {
                 if (numbers.length > 1) {
@@ -125,16 +107,14 @@ function updatNumber(action, value) {
 
                 numbers[actions.length] = n;
             }
-
             break;
+
         case ACTION_DELETE:
             numbers = ['0'];
             actions = [];
 
             break;
-        case ACTION_REPLACE:
 
-            break;
         case ACTION_REVERS:
             n = numbers[actions.length];
             if (n[0] === '-') {
@@ -167,7 +147,6 @@ function updatNumber(action, value) {
                         case '/':
                             a /= b;
                             break;
-
                     }
                 } else {
                     a = parseFloat(numbers[i]);
@@ -176,10 +155,7 @@ function updatNumber(action, value) {
 
             numbers = [a.toString()];
             actions = [];
-
-
             break;
-
 
         case ACTION_PROC:
 
@@ -220,6 +196,8 @@ function updatNumber(action, value) {
 
     }
 }
+/*
+ * * Show numbers and action, result to input*/
 function updateInput() {
 
     var upIntp = '';
