@@ -14,6 +14,7 @@ var ACTION_REPLACE = 'replace';
 var ACTION_REVERS = 'revers';
 var ACTION_DEL_LAST = 'last_del';
 var ACTION_CALCUL = 'calcul';
+var ACTION_PROC = 'proc';
 
 
 function handleClick(e) {
@@ -31,19 +32,21 @@ function handleClick(e) {
                 break;
             case '&#177;':
                 updatNumber(ACTION_REVERS);
+                break;
+            case '%':
+                updatNumber(ACTION_PROC);
 
                 break;
             case '+':
             case '-':
             case '*':
             case '/':
-            case '%':
 
-               var n = numbers[actions.length];
-                if(n[n.length-1] === '.') {
+                var n = numbers[actions.length];
+                if (n[n.length - 1] === '.') {
                     n = n.substring(0, n.length - 1);
                 }
-                    numbers[actions.length] = n;
+                numbers[actions.length] = n;
 
 
                 if (numbers[numbers.length - 1] !== '0') {
@@ -81,7 +84,6 @@ function updatNumber(action, value) {
 
             switch (value) {
                 case '.':
-                    // $('input').val(n);
                     n += value;
                     if (n.indexOf('.') === -1) {
                     }
@@ -93,7 +95,6 @@ function updatNumber(action, value) {
                         n += value;
                     }
                     break;
-
 
                     break;
                 default:
@@ -109,15 +110,12 @@ function updatNumber(action, value) {
 
             break;
         case ACTION_DEL_LAST:
-            if (numbers[actions.length] === '0')
-            {
-                if (numbers.length > 1)
-                {
+            if (numbers[actions.length] === '0') {
+                if (numbers.length > 1) {
                     numbers.pop();
                     actions.pop();
                 }
-            } else
-                {
+            } else {
 
                 n = numbers[actions.length];
                 n = n.substring(0, n.length - 1);
@@ -138,7 +136,7 @@ function updatNumber(action, value) {
 
             break;
         case ACTION_REVERS:
-             n = numbers[actions.length];
+            n = numbers[actions.length];
             if (n[0] === '-') {
                 n = n.substring(1, n.length);
             } else {
@@ -169,18 +167,56 @@ function updatNumber(action, value) {
                         case '/':
                             a /= b;
                             break;
+
                     }
                 } else {
                     a = parseFloat(numbers[i]);
                 }
             }
 
-            numbers = [a];
+            numbers = [a.toString()];
             actions = [];
+
+
+            break;
+
+
+        case ACTION_PROC:
+
+            var a;
+
+            for (var i = 0; i < numbers.length-1; i++) {
+                if (a) {
+                    var b = parseFloat(numbers[i]);
+                    switch (actions[i - 1]) {
+                        case '+':
+                            a += b;
+                            break;
+                        case '-':
+                            a -= b;
+                            break;
+                        case '*':
+                            a *= b;
+                            break;
+                        case '/':
+                            a /= b;
+                            break;
+
+                    }
+                } else {
+                    a = parseFloat(numbers[i]);
+                }
+            }
+            numbers[actions.length] = ((a/100) * numbers[actions.length]).toString();
+
+
+
+
+
+            break;
 
     }
 }
-
 function updateInput() {
 
     var upIntp = '';
