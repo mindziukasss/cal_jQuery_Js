@@ -39,6 +39,10 @@ function handleClick(e) {
             case '/':
             case '%':
 
+               var n = numbers[actions.length];
+                if(n[n.length] = '.')
+                    n = n.substring(0, n.length - 1);
+                numbers[actions.length] = n;
 
                 if (numbers[numbers.length - 1] !== '0') {
                     actions.push($b.val());
@@ -62,7 +66,6 @@ function handleClick(e) {
 
     updateInput();
     console.log(numbers, actions);
-    // console.log(actions);
 
 }
 
