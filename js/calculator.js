@@ -40,9 +40,11 @@ function handleClick(e) {
             case '%':
 
                var n = numbers[actions.length];
-                if(n[n.length] = '.')
+                if(n[n.length-1] === '.') {
                     n = n.substring(0, n.length - 1);
-                numbers[actions.length] = n;
+                }
+                    numbers[actions.length] = n;
+
 
                 if (numbers[numbers.length - 1] !== '0') {
                     actions.push($b.val());
